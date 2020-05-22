@@ -7,7 +7,7 @@ De acordo com o a liberdade do tema foi criado um projeto para utilizar o recurs
 
 - Lucas de Lima Chaves
 - Rodolfo Santos
-- Robson Souza
+- Robson Sousa
 - Alexandre
 
 ## Requisitos
