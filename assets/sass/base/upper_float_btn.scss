@@ -1,0 +1,22 @@
+// There is nothing here...
+
+.btn-upper {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    height: 50px;
+    width: 50px;
+    color: $cor-secundaria;
+    background-color: $cor-derivada;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    border-radius: 50%;
+  
+    &:hover {
+      text-decoration: none;
+      color: $cor-secundaria;
+      transform: scale(1.05);
+    }
+  }

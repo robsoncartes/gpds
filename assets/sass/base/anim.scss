@@ -1,0 +1,37 @@
+.anime-fadeIn {
+    opacity: 0;
+    transition: 1s;
+}
+
+.anime-left {
+    opacity: 0;
+    transform: translate3d(-100px, 0, 0);
+    transition: 1s;
+}
+
+.anime-right {
+    opacity: 0;
+    transform: translate3d(100px, 0, 0);
+    transition: 1s;
+}
+
+.anime-top {
+    opacity: 0;
+    transform: translate3d(0, -100px, 0);
+    transition: 1s;
+}
+
+.anime-bottom {
+    opacity: 0;
+    transform: translate3d(0, 100px, 0);
+    transition: 1s;
+}
+
+.anime-start {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+}
+
+.anime-grafico {
+    width: 0px;
+}

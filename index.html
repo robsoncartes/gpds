@@ -10,17 +10,19 @@
 <body>
     <div id="app">
         <p id="output"></p>
-        <button v-on:click="listen">Buscar por Titulo</button>
+        <button v-on:click="listen">Falar</button>
         <button v-on:click="fetchMoviesByTitle('batman')">Busca Rápida</button>
         <div>
-            <ul class="row justify-content-between">
-                <li v-for="movie in movies" class="d-flex flex-column col-5 col-md-4 col-lg-3 card">
+            <!-- <ul class="row justify-content-between">
+                <li v-for="(movie, index) in movies"class="d-flex flex-column col-5 col-md-4 col-lg-3 card">
                     <img :src="movie.poster_path" alt="" class="card-header">
                     <div class="card-body">
+                        <strong>{{ index }}</strong>
                         <strong>{{movie.title}}</strong> 
+                        <strong>{{movie.overview}}</strong> 
                     </div>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
 
