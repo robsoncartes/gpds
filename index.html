@@ -5,15 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <title>Document</title>
 </head>
-<body>
+<body class="bg-black-1">
     <div id="app">
+        <nav class="bg-black-2 text-muted">
+            <div>
+                <button>Botão</button>
+                <p>Clique no botão e fale!</p>
+            </div>
+
+            <ul>
+                <li class="bg-black-3">Ver Histórico</li>
+                <li class="bg-black-3">Ver Dicas</li>
+                <li class="bg-black-3">Ver Créditos</li>
+                <li class="bg-black-3">Sair</li>
+            </ul>
+
+            <div>
+                <a href="#">Github </a>
+            </div> 
+        </nav>
+
+        <div class="bg-black-2">
+
+        </div>
+
+
         <p id="output"></p>
         <button v-on:click="listen">Falar</button>
         <button v-on:click="fetchMoviesByTitle('batman')">Busca Rápida</button>
         <div>
-            <!-- <ul class="row justify-content-between">
+            <ul class="row justify-content-between">
                 <li v-for="(movie, index) in movies"class="d-flex flex-column col-5 col-md-4 col-lg-3 card">
                     <img :src="movie.poster_path" alt="" class="card-header">
                     <div class="card-body">
@@ -22,7 +46,7 @@
                         <strong>{{movie.overview}}</strong> 
                     </div>
                 </li>
-            </ul> -->
+            </ul>
         </div>
     </div>
 
