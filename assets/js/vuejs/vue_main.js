@@ -53,15 +53,16 @@ const MainVue = new Vue({
                           if(item.poster_path != null){
                             item.poster_path = 'http://image.tmdb.org/t/p/w185' + item.poster_path
                             app.movies.push(item)
-                            console.log(item)
                           }
                         })
                     })
                 }
-            })
+            }
+            )
             .catch(function(error) {
               console.log("Não encontramos mais nada. ")
             })
+ 
       },
 
       fetchMoviesByGenre(genre) {
@@ -84,9 +85,6 @@ const MainVue = new Vue({
                 console.log(item)
               }
             })
-        })
-        .catch(function(error) {
-          console.log("Não encontramos mais nada. ")
         })
       },
 
