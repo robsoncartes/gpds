@@ -86,26 +86,26 @@ body {
 }
 
 
-@media (max-width: 720px){
+@media (max-width: 720px) {
 
     .margin-1 {
         margin-top: 50px;
         margin-bottom: 50px;
     }
-    
+
     .margin-2 {
         margin-top: 100px;
         margin-bottom: 100px;
     }
-    
+
     .padding-025 {
         padding: 25px 0;
     }
-    
+
     .padding-1 {
         padding: 50px 0;
     }
-    
+
     .padding-2 {
         padding: 100px 0;
     }
@@ -136,10 +136,18 @@ a.active {
     color: $cor-padrao;
     opacity: .7;
     transition: .5s;
-    
+
     &:hover {
         color: $cor-padrao;
         text-decoration: none;
         opacity: 1;
-    };
+    }
+
+    ;
+}
+
+input:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
 }
