@@ -182,7 +182,7 @@ export default {
 
     abrirSinopse(id) {
       let numero = id - 1;
-      this.sinopseModal = this.movies[id];
+      this.sinopseModal = this.movies[numero];
       console.log(this.sinopseModal);
       this.$bvModal.show("modal-filme");
     }
