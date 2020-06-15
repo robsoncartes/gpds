@@ -31,6 +31,19 @@
       </div>
       <div class="slideshow-sub"></div>
     </div>
+
+    <b-modal id="modal-filme" size="lg">
+      <template v-slot:modal-header="{}">
+        <h5 class="text-danger">{{ sinopseModal.title }}</h5>
+      </template>
+      <template>
+        <p class="text-muted">{{ sinopseModal.overview }}</p>
+      </template>
+
+      <template v-slot:modal-footer="{ ok }">
+        <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -42,7 +55,8 @@ export default {
       genres: [],
       genresName: [],
       output: "",
-      estado: "Clique no botão e fale!"
+      estado: "Clique no botão e fale!",
+      sinopseModal: {}
     };
   },
 
@@ -70,6 +84,9 @@ export default {
               } else if (content.indexOf("gênero") != -1) {
                 let frase = content.split("gênero ");
                 app.fetchMoviesByGenre(frase[1]);
+              } else if (content.indexOf("sobre o filme ") != -1) {
+                let frase = content.split("filme ");
+                app.abrirSinopse(frase[1]);
               }
             }
           }
@@ -114,6 +131,7 @@ export default {
         .catch(function() {
           console.log("Não encontramos mais nada. ");
         });
+      console.log(this.movies);
     },
 
     fetchMoviesByGenre(genre) {
@@ -160,6 +178,13 @@ export default {
             app.genresName.push(genre);
           });
         });
+    },
+
+    abrirSinopse(id) {
+      let numero = id - 1;
+      this.sinopseModal = this.movies[id];
+      console.log(this.sinopseModal);
+      this.$bvModal.show("modal-filme");
     }
   },
 
