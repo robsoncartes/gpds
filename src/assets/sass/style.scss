@@ -1,0 +1,13 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+@import 'helpers/variaveis';
+@import 'helpers/placeholders';
+
+@import 'base/custom';
+@import 'base/fonts';
+@import 'base/scrollbar';
+
+
+@import 'layout/nav-left';
+@import 'layout/main-container';
