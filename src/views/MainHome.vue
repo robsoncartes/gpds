@@ -9,7 +9,7 @@
       </div>
 
       <ul class="menu-container">
-        <li class="mb-1">Ver Histórico</li>
+        <li class="mb-1" @click="abrirHistorico">Ver Histórico</li>
         <li class="mb-1">Ver Dicas</li>
         <li class="mb-1">Ver Créditos</li>
         <li class="mb-1">Sair</li>
@@ -44,6 +44,20 @@
         <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
       </template>
     </b-modal>
+
+    <b-modal id="modal-historico" size="lg">
+      <template v-slot:modal-header="{}">
+        <h5 class="text-danger">Histórico de Frase</h5>
+      </template>
+      <template>
+        <b-table striped hover :items="historico" v-if="historico.length > 0"></b-table>
+        <p v-else>Você não pesquisou nada ainda, dê uma olhada nas dicas para começar</p>
+      </template>
+
+      <template v-slot:modal-footer="{ ok }">
+        <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -56,7 +70,8 @@ export default {
       genresName: [],
       output: "",
       estado: "Clique no botão e fale!",
-      sinopseModal: {}
+      sinopseModal: {},
+      historico: []
     };
   },
 
@@ -78,6 +93,7 @@ export default {
               app.estado = "Clique no botão e fale!";
               const content = event.results[i][0].transcript.trim();
               app.output = content;
+              app.adicionarHistorico(content);
               if (content.indexOf("título") != -1) {
                 let frase = content.split("título ");
                 app.fetchMoviesByTitle(frase[1]);
@@ -185,6 +201,43 @@ export default {
       this.sinopseModal = this.movies[numero];
       console.log(this.sinopseModal);
       this.$bvModal.show("modal-filme");
+    },
+
+    abrirHistorico() {
+      this.$bvModal.show("modal-historico");
+    },
+    adicionarHistorico(frase) {
+      let hoje = new Date();
+      let date = this.formatDate(hoje);
+      let obj = {
+        frase: frase,
+        data: date
+      };
+      this.historico.push(obj);
+    },
+
+    formatDate(date) {
+      let dia = date.getDate();
+      let mes = [
+        "janeiro",
+        "fevereiro",
+        "março",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro"
+      ][date.getMonth()];
+      let ano = date.getFullYear();
+      let horas = date.getHours();
+      let minutos = date.getMinutes();
+      let segundos = date.getSeconds();
+
+      return `${dia} de ${mes} de ${ano} às ${horas}:${minutos}:${segundos}`;
     }
   },
 
