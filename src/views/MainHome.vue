@@ -12,13 +12,13 @@
             <ul class="menu-container">
                 <li class="mb-1" @click="abrirFavoritos">Meus Favoritos</li>
                 <li class="mb-1" @click="abrirHistorico">Ver Histórico</li>
-                <li class="mb-1">Ver Dicas</li>
+                <li class="mb-1" @click="abrirDicas">Ver Dicas</li>
                 <li class="mb-1">Ver Créditos</li>
                 <li class="mb-1">Sair</li>
             </ul>
 
             <div>
-                <a href="#">Github</a>
+                <a href="https://github.com/robsoncartes/gpds">Github</a>
             </div>
         </nav>
 
@@ -101,6 +101,23 @@
             </template>
             <template>
                 <p>Verifique sua lista de favoritos, o filme foi adicionado.</p>
+            </template>
+
+            <template v-slot:modal-footer="{ ok }">
+                <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+            </template>
+        </b-modal>
+
+        <b-modal id="modal-mostrar-dicas" size="lg">
+            <template v-slot:modal-header="{}">
+                <h5 class="text-danger">Dicas</h5>
+            </template>
+            <template>
+                <ul class="menu-dicas">
+                    <li>Para buscar um filme por título, fale: título nome-do-filme. Ex.: título Homem Aranha</li>
+                    <li>Para buscar filmes por gênero, fale: gênero gênero. Ex.: gênero ação</li>
+                    <li>Outras dicas poderão ser adicionadas aqui. Ex.: ver histórico</li>
+                </ul>
             </template>
 
             <template v-slot:modal-footer="{ ok }">
@@ -262,6 +279,10 @@
 
             abrirFavoritos() {
                 this.$bvModal.show("modal-favoritos");
+            },
+
+            abrirDicas() {
+                this.$bvModal.show("modal-mostrar-dicas");
             },
 
             formatDate(date) {
