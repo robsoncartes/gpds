@@ -1,14 +1,16 @@
 <template>
-  <div class="row">
+  <div class="row m-auto">
     <nav class="text-white col-md-3 p-0">
       <div class="botao-container">
         <button class="text-muted" @click="listen">
           <i class="fas fa-microphone-alt"></i>
         </button>
         <p>{{ estado }}</p>
+        <p class="text-muted">Você disse: {{ output }}</p>
       </div>
 
       <ul class="menu-container">
+        <li class="mb-1" @click="abrirFavoritos">Meus Favoritos</li>
         <li class="mb-1" @click="abrirHistorico">Ver Histórico</li>
         <li class="mb-1">Ver Dicas</li>
         <li class="mb-1">Ver Créditos</li>
@@ -20,12 +22,19 @@
       </div>
     </nav>
 
+    <div class="col-md-3">_</div>
+
     <div class="main-container col-md-9 text-white">
-      <div class="row">
-        <p class="text-muted">{{ output }}</p>
+      <div class="row m-auto">
         <div class="row p-3">
-          <div class="filme col-3 p-2" v-for="(movie, index) in movies" :key="index">
+          <div
+            class="filme col-3 py-4"
+            v-for="(movie, index) in movies"
+            :key="index"
+            @click="abrirSinopse(index + 1)"
+          >
             <img :src="movie.poster_path" />
+            <div class="indice">{{ index + 1 }}</div>
           </div>
         </div>
       </div>
@@ -37,11 +46,22 @@
         <h5 class="text-danger">{{ sinopseModal.title }}</h5>
       </template>
       <template>
-        <p class="text-muted">{{ sinopseModal.overview }}</p>
+        <div class="row">
+          <img :src="sinopseModal.poster_path" class="col-3" />
+          <div class="col-9">
+            <p class="text-muted">{{ sinopseModal.overview }}</p>
+            <a :href="sinopseModal.google" target="_blank">Saber Mais</a>
+          </div>
+        </div>
       </template>
 
       <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
+        <b-button
+          size="sm"
+          variant="danger"
+          @click="adicionarFavorito(idSelecionado)"
+        >Adicionar aos Favoritos</b-button>
+        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
       </template>
     </b-modal>
 
@@ -55,7 +75,35 @@
       </template>
 
       <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
+        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+      </template>
+    </b-modal>
+
+    <b-modal id="modal-favoritos" size="lg">
+      <template v-slot:modal-header="{}">
+        <h5 class="text-danger">Meus Favoritos</h5>
+      </template>
+      <template>
+        <div class="row">
+          <div v-for="(favorito, index) in favoritos" :key="index" class="col-12">{{favorito.title}}</div>
+        </div>
+      </template>
+
+      <template v-slot:modal-footer="{ ok }">
+        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+      </template>
+    </b-modal>
+
+    <b-modal id="modal-confirma-favorito" size="sm">
+      <template v-slot:modal-header="{}">
+        <h5 class="text-success">Filme adicionado com sucesso</h5>
+      </template>
+      <template>
+        <p>Verifique sua lista de favoritos, o filme foi adicionado.</p>
+      </template>
+
+      <template v-slot:modal-footer="{ ok }">
+        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
       </template>
     </b-modal>
   </div>
@@ -71,7 +119,9 @@ export default {
       output: "",
       estado: "Clique no botão e fale!",
       sinopseModal: {},
-      historico: []
+      historico: [],
+      favoritos: [],
+      idSelecionado: ""
     };
   },
 
@@ -100,9 +150,12 @@ export default {
               } else if (content.indexOf("gênero") != -1) {
                 let frase = content.split("gênero ");
                 app.fetchMoviesByGenre(frase[1]);
-              } else if (content.indexOf("sobre o filme ") != -1) {
+              } else if (content.indexOf("sobre o filme") != -1) {
                 let frase = content.split("filme ");
                 app.abrirSinopse(frase[1]);
+              } else if (content.indexOf("favoritar filme") != -1) {
+                let frase = content.split("filme ");
+                app.adicionarFavorito(frase[1]);
               }
             }
           }
@@ -196,16 +249,6 @@ export default {
         });
     },
 
-    abrirSinopse(id) {
-      let numero = id - 1;
-      this.sinopseModal = this.movies[numero];
-      console.log(this.sinopseModal);
-      this.$bvModal.show("modal-filme");
-    },
-
-    abrirHistorico() {
-      this.$bvModal.show("modal-historico");
-    },
     adicionarHistorico(frase) {
       let hoje = new Date();
       let date = this.formatDate(hoje);
@@ -214,6 +257,28 @@ export default {
         data: date
       };
       this.historico.push(obj);
+    },
+
+    adicionarFavorito(id) {
+      this.favoritos.push(this.movies[id - 1]);
+      this.$bvModal.show("modal-confirma-favorito");
+    },
+
+    abrirSinopse(id) {
+      this.idSelecionado = id;
+      console.log(this.idSelecionado);
+      this.sinopseModal = this.movies[id - 1];
+      this.sinopseModal.google =
+        "https://www.google.com/search?q=" + this.sinopseModal.title;
+      this.$bvModal.show("modal-filme");
+    },
+
+    abrirHistorico() {
+      this.$bvModal.show("modal-historico");
+    },
+
+    abrirFavoritos() {
+      this.$bvModal.show("modal-favoritos");
     },
 
     formatDate(date) {
