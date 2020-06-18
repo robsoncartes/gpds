@@ -172,10 +172,12 @@
             <strong>gênero ação</strong>
           </li>
           <li>
-            Outras dicas poderão ser adicionadas aqui. Ex.:
-            <span
-              style="text-decoration: line-through;"
-            >ver histórico</span>
+            Para buscar abrir o histórico, fale:
+            <strong>abrir histórico</strong>
+          </li>
+          <li>
+            Para buscar abrir a lista de favoritos, fale:
+            <strong>abrir favoritos</strong>
           </li>
         </ul>
       </template>
@@ -221,7 +223,9 @@ export default {
           for (let i = event.resultIndex; i < event.results.length; i++) {
             if (event.results[i].isFinal) {
               app.estado = "Clique no botão e fale!";
-              const content = event.results[i][0].transcript.trim();
+              const escutou = event.results[i][0].transcript.trim();
+              const content = escutou.toLowerCase();
+              console.log(content);
               app.output = content;
               app.adicionarHistorico(content);
               if (content.indexOf("título") !== -1) {
