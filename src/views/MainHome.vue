@@ -173,11 +173,11 @@
           </li>
           <li>
             Para buscar abrir o histórico, fale:
-            <strong>abrir histórico</strong>
+            <strong>ver histórico</strong>
           </li>
           <li>
             Para buscar abrir a lista de favoritos, fale:
-            <strong>abrir favoritos</strong>
+            <strong>ver favoritos</strong>
           </li>
         </ul>
       </template>
