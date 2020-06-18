@@ -236,6 +236,18 @@ export default {
               } else if (content.indexOf("favoritar filme") !== -1) {
                 let frase = content.split("filme ");
                 app.adicionarFavorito(frase[1]);
+              } else if (content.indexOf("remover favorito") !== -1) {
+                let frase = content.split("favorito ");
+                app.removerFavorito(frase[1]);
+              } else if (content.indexOf("abrir favorito ") !== -1) {
+                let frase = content.split("favorito ");
+                app.abrirSinopseFavorito(frase[1]);
+              } else if (content.indexOf("ver histórico") !== -1) {
+                app.abrirHistorico();
+              } else if (content.indexOf("ver dicas") !== -1) {
+                app.abrirDicas();
+              } else if (content.indexOf("ver favoritos") !== -1) {
+                app.abrirFavoritos();
               }
             }
           }
