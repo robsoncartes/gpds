@@ -114,9 +114,10 @@
             </template>
             <template>
                 <ul class="menu-dicas">
-                    <li>Para buscar um filme por título, fale: título nome-do-filme. Ex.: título Homem Aranha</li>
-                    <li>Para buscar filmes por gênero, fale: gênero gênero. Ex.: gênero ação</li>
-                    <li>Outras dicas poderão ser adicionadas aqui. Ex.: ver histórico</li>
+                    <li>Para buscar um filme por título, fale: título nome-do-filme. Ex.: <strong>título Homem Aranha</strong></li>
+                    <li>Para buscar filmes por gênero, fale: gênero gênero. Ex.: <strong>gênero ação</strong></li>
+                    <li>Outras dicas poderão ser adicionadas aqui. Ex.: <span style="text-decoration: line-through;">ver histórico</span>
+                    </li>
                 </ul>
             </template>
 
