@@ -55,22 +55,23 @@ export default {
     return {
       form: {
         email: "",
-        name: "",
-        food: null,
-        checked: []
-      },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
-      ],
-      show: true
+        password: ""
+      }
     };
   },
   methods: {
-    auth() {}
+    async auth() {
+      const { email, password } = this;
+
+      try {
+        const res = await this.$firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 };
 </script>
