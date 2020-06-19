@@ -273,6 +273,7 @@ export default {
       fetch(uri)
         .then(r => r.json())
         .then(resultado => {
+          console.log(resultado);
           for (let i = 1; i <= resultado.total_pages; i++) {
             let uri =
               "https://api.themoviedb.org/3/search/movie?api_key=" +
