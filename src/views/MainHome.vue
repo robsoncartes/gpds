@@ -1,192 +1,194 @@
 <template>
-  <div class="row m-auto">
-    <nav class="text-white col-md-3 p-0">
-      <div class="botao-container">
-        <button class="text-muted" @click="listen">
-          <i class="fas fa-microphone-alt"></i>
-        </button>
-        <p>{{ estado }}</p>
-        <p class="text-muted">Você disse: {{ output }}</p>
-      </div>
-
-      <ul class="menu-container">
-        <li class="mb-1" @click="abrirFavoritos">Meus Favoritos</li>
-        <li class="mb-1" @click="abrirHistorico">Ver Histórico</li>
-        <li class="mb-1" @click="abrirDicas">Ver Dicas</li>
-        <li class="mb-1">Ver Créditos</li>
-        <li class="mb-1">Sair</li>
-      </ul>
-
-      <div>
-        <a href="https://github.com/robsoncartes/gpds">Github</a>
-      </div>
-    </nav>
-
-    <div class="col-md-3">_</div>
-
-    <div class="main-container col-md-9 text-white">
-      <div class="row m-auto">
-        <div class="row p-3">
-          <div
-            class="filme col-3 py-4"
-            v-for="(movie, index) in movies"
-            :key="index"
-            @click="abrirSinopse(index + 1)"
-          >
-            <img :src="movie.poster_path" />
-            <div class="indice">{{ index + 1 }}</div>
-          </div>
+  <transition>
+    <div class="row m-auto">
+      <nav class="text-white col-md-3 p-0">
+        <div class="botao-container">
+          <button class="text-muted" @click="listen">
+            <i class="fas fa-microphone-alt"></i>
+          </button>
+          <p>{{ estado }}</p>
+          <p class="text-muted">Você disse: {{ output }}</p>
         </div>
-      </div>
-      <div class="slideshow-sub"></div>
-    </div>
 
-    <b-modal id="modal-filme" size="lg">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-danger">{{ sinopseModal.title }}</h5>
-      </template>
-      <template>
-        <div class="row">
-          <img :src="sinopseModal.poster_path" class="col-3" />
-          <div class="col-9">
-            <p class="text-muted">{{ sinopseModal.overview }}</p>
-            <a :href="sinopseModal.google" target="_blank">Saber Mais</a>
-          </div>
-        </div>
-      </template>
-
-      <template v-slot:modal-footer="{ ok }">
-        <b-button
-          size="sm"
-          variant="danger"
-          @click="adicionarFavorito(idSelecionado)"
-        >Adicionar aos Favoritos</b-button>
-        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-
-    <b-modal id="modal-historico" size="lg">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-danger">Histórico de Frase</h5>
-      </template>
-      <template>
-        <b-table striped hover :items="historico" v-if="historico.length > 0"></b-table>
-        <p v-else>Você não pesquisou nada ainda, dê uma olhada nas dicas para começar</p>
-      </template>
-
-      <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-
-    <b-modal id="modal-favoritos" size="lg">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-danger">Meus Favoritos</h5>
-      </template>
-      <template>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Cód.</th>
-              <th scope="col">Título</th>
-              <th scope="col" class="text-center">Remover</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(favorito, index) in favoritos" :key="index">
-              <th scope="row">{{ index + 1 }}</th>
-              <td
-                @click="abrirSinopseFavorito(index + 1)"
-                class="title-favorito"
-              >{{ favorito.title }}</td>
-              <td class="text-center">
-                <b-icon-x class="btn-remove" @click="removerFavorito(index + 1)"></b-icon-x>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-
-      <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-
-    <b-modal id="modal-confirma-favorito" size="sm">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-success">Filme adicionado com sucesso</h5>
-      </template>
-      <template>
-        <p>Verifique sua lista de favoritos, o filme foi adicionado.</p>
-      </template>
-
-      <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-
-    <b-modal id="modal-erro-favorito" size="sm">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-danger">Erro ao adicionar a favoritos</h5>
-      </template>
-      <template>
-        <p>O filme já está na sua lista de favoritos!</p>
-      </template>
-
-      <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-
-    <b-modal id="modal-filme-favorito" size="lg">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-danger">{{ sinopseModalFavorito.title }}</h5>
-      </template>
-      <template>
-        <div class="row">
-          <img :src="sinopseModalFavorito.poster_path" class="col-3" />
-          <div class="col-9">
-            <p class="text-muted">{{ sinopseModalFavorito.overview }}</p>
-            <a :href="sinopseModalFavorito.google" target="_blank">Saber Mais</a>
-          </div>
-        </div>
-      </template>
-
-      <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-
-    <b-modal id="modal-mostrar-dicas" size="lg">
-      <template v-slot:modal-header="{}">
-        <h5 class="text-danger">Dicas</h5>
-      </template>
-      <template>
-        <ul class="menu-dicas">
-          <li>
-            Para buscar um filme por título, fale: título nome-do-filme. Ex.:
-            <strong>título Homem Aranha</strong>
-          </li>
-          <li>
-            Para buscar filmes por gênero, fale: gênero gênero. Ex.:
-            <strong>gênero ação</strong>
-          </li>
-          <li>
-            Para buscar abrir o histórico, fale:
-            <strong>ver histórico</strong>
-          </li>
-          <li>
-            Para buscar abrir a lista de favoritos, fale:
-            <strong>ver favoritos</strong>
-          </li>
+        <ul class="menu-container">
+          <li class="mb-1" @click="abrirFavoritos">Meus Favoritos</li>
+          <li class="mb-1" @click="abrirHistorico">Ver Histórico</li>
+          <li class="mb-1" @click="abrirDicas">Ver Dicas</li>
+          <li class="mb-1">Ver Créditos</li>
+          <li class="mb-1" @click="logout">Sair</li>
         </ul>
-      </template>
 
-      <template v-slot:modal-footer="{ ok }">
-        <b-button size="sm" variant="success" @click="ok()">OK</b-button>
-      </template>
-    </b-modal>
-  </div>
+        <div>
+          <a href="https://github.com/robsoncartes/gpds">Github</a>
+        </div>
+      </nav>
+
+      <div class="col-md-3">_</div>
+
+      <div class="main-container col-md-9 text-white">
+        <div class="row m-auto">
+          <div class="row p-3">
+            <div
+              class="filme col-3 py-4"
+              v-for="(movie, index) in movies"
+              :key="index"
+              @click="abrirSinopse(index + 1)"
+            >
+              <img :src="movie.poster_path" />
+              <div class="indice">{{ index + 1 }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="slideshow-sub"></div>
+      </div>
+
+      <b-modal id="modal-filme" size="lg">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">{{ sinopseModal.title }}</h5>
+        </template>
+        <template>
+          <div class="row">
+            <img :src="sinopseModal.poster_path" class="col-3" />
+            <div class="col-9">
+              <p class="text-muted">{{ sinopseModal.overview }}</p>
+              <a :href="sinopseModal.google" target="_blank">Saber Mais</a>
+            </div>
+          </div>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button
+            size="sm"
+            variant="danger"
+            @click="adicionarFavorito(idSelecionado)"
+          >Adicionar aos Favoritos</b-button>
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+
+      <b-modal id="modal-historico" size="lg">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">Histórico de Frase</h5>
+        </template>
+        <template>
+          <b-table striped hover :items="historico" v-if="historico.length > 0"></b-table>
+          <p v-else>Você não pesquisou nada ainda, dê uma olhada nas dicas para começar</p>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+
+      <b-modal id="modal-favoritos" size="lg">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">Meus Favoritos</h5>
+        </template>
+        <template>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Cód.</th>
+                <th scope="col">Título</th>
+                <th scope="col" class="text-center">Remover</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(favorito, index) in favoritos" :key="index">
+                <th scope="row">{{ index + 1 }}</th>
+                <td
+                  @click="abrirSinopseFavorito(index + 1)"
+                  class="title-favorito"
+                >{{ favorito.title }}</td>
+                <td class="text-center">
+                  <b-icon-x class="btn-remove" @click="removerFavorito(index + 1)"></b-icon-x>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+
+      <b-modal id="modal-confirma-favorito" size="sm">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-success">Filme adicionado com sucesso</h5>
+        </template>
+        <template>
+          <p>Verifique sua lista de favoritos, o filme foi adicionado.</p>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+
+      <b-modal id="modal-erro-favorito" size="sm">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">Erro ao adicionar a favoritos</h5>
+        </template>
+        <template>
+          <p>O filme já está na sua lista de favoritos!</p>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="danger" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+
+      <b-modal id="modal-filme-favorito" size="lg">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">{{ sinopseModalFavorito.title }}</h5>
+        </template>
+        <template>
+          <div class="row">
+            <img :src="sinopseModalFavorito.poster_path" class="col-3" />
+            <div class="col-9">
+              <p class="text-muted">{{ sinopseModalFavorito.overview }}</p>
+              <a :href="sinopseModalFavorito.google" target="_blank">Saber Mais</a>
+            </div>
+          </div>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+
+      <b-modal id="modal-mostrar-dicas" size="lg">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">Dicas</h5>
+        </template>
+        <template>
+          <ul class="menu-dicas">
+            <li>
+              Para buscar um filme por título, fale: título nome-do-filme. Ex.:
+              <strong>título Homem Aranha</strong>
+            </li>
+            <li>
+              Para buscar filmes por gênero, fale: gênero gênero. Ex.:
+              <strong>gênero ação</strong>
+            </li>
+            <li>
+              Para buscar abrir o histórico, fale:
+              <strong>ver histórico</strong>
+            </li>
+            <li>
+              Para buscar abrir a lista de favoritos, fale:
+              <strong>ver favoritos</strong>
+            </li>
+          </ul>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -424,6 +426,16 @@ export default {
       let segundos = date.getSeconds();
 
       return `${dia} de ${mes} de ${ano} às ${horas}:${minutos}:${segundos}`;
+    },
+
+    async logout() {
+      this.$root.$emit("Spinner::show");
+
+      await this.$firebase.auth().signOut();
+
+      this.$router.push({ name: "login" });
+
+      this.$root.$emit("Spinner::hide");
     }
   },
 
@@ -433,6 +445,4 @@ export default {
 };
 </script>
 
-<style scoped>
 
-</style>

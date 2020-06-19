@@ -1,13 +1,13 @@
 <template>
   <b-container class="login-screen">
     <transition appear>
-      <b-form @submit.prevent="auth" @reset="onReset" v-if="show" class="login-container">
+      <b-form @submit.prevent="auth" class="login-container">
         <h1 class="mb-4 text-muted">BuscaFilmes</h1>
         <hr />
         <b-form-group label="Usuário" label-for="inputUsuario" description>
           <b-form-input
             id="inputUsuario"
-            v-model="form.email"
+            v-model="email"
             type="text"
             required
             placeholder="Entre com seu usuario"
@@ -17,7 +17,7 @@
         <b-form-group label="Senha:" label-for="inputSenha" description>
           <b-form-input
             id="inputSenha"
-            v-model="form.password"
+            v-model="password"
             type="password"
             required
             placeholder="Entre com a Senha"
@@ -28,8 +28,13 @@
         </div>
 
         <div>
-          <b-button type="submit" variant="success" class="mr-2">Login</b-button>
-          <b-button type="reset" variant="danger" @click="onReset()">Limpar Campos</b-button>
+          <b-button type="submit" variant="success" class="mr-2" :disabled="loading">
+            <template v-if="loading">
+              Entrando...
+              <i class="fas fa-spinner fa-spin"></i>
+            </template>
+            <template v-else>Entrar</template>
+          </b-button>
         </div>
       </b-form>
     </transition>
@@ -50,28 +55,43 @@
 </template>
 
 <script>
+import router from "../router";
+
 export default {
   data() {
     return {
-      form: {
-        email: "",
-        password: ""
-      }
+      email: "",
+      password: "",
+      loading: false
     };
   },
   methods: {
     async auth() {
+      this.loading = true;
       const { email, password } = this;
 
       try {
         const res = await this.$firebase
           .auth()
           .signInWithEmailAndPassword(email, password);
-        console.log(res);
+
+        window.uid = res.user.uid;
+
+        router.push("/");
       } catch (err) {
         console.log(err);
       }
+
+      this.loading = false;
     }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (window.uid) {
+        vm.$router.push("/");
+      }
+    });
   }
 };
 </script>

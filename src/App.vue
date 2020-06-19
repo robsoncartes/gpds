@@ -1,25 +1,32 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div id="app">
+    <base-spinner />
+    <router-view />
   </div>
 </template>
 
 <script>
 import router from "./router";
+import BaseSpinner from "./components/BaseSpinner";
 
 export default {
   data() {
     return {};
   },
-  components: {},
-  methods: {
-    sair() {
-      router.push("/login");
-    }
+  components: {
+    BaseSpinner
   },
+  methods: {},
 
   mounted() {
-    console.log(this.$firebase);
+    this.$firebase.auth().onAuthStateChanged(user => {
+      window.uid = user ? user.uid : null;
+      router.push(window.uid ? "/" : "/login");
+
+      setTimeout(() => {
+        this.$root.$emit("Spinner::hide");
+      }, 300);
+    });
   }
 };
 </script>

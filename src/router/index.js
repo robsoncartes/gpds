@@ -4,13 +4,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 const routes = [{
-    path: '/',
-    name: 'Login',
+    path: '/login',
+    name: 'login',
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: '/',
+    name: 'home',
     component: () => import('../views/MainHome.vue')
   }
 ]
@@ -20,5 +20,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+router.beforeEach((to, from, next) => {
+  if (!window.uid && to.name !== 'login') {
+    next({
+      name: 'login'
+    })
+  } else {
+    next()
+  }
+})
 
 export default router
