@@ -1,5 +1,5 @@
 <template>
-  <transition>
+  <transition appear>
     <div class="row m-auto">
       <nav class="text-white col-md-3 p-0">
         <div class="botao-container">
