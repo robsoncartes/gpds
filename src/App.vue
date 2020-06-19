@@ -1,19 +1,28 @@
 <template>
-  <main-home></main-home>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import MainHome from "./views/MainHome.vue";
+import router from "./router";
 
 export default {
   data() {
     return {};
   },
-  components: {
-    MainHome
+  components: {},
+  methods: {
+    sair() {
+      router.push("/login");
+    }
+  },
+
+  mounted() {
+    console.log(this.$firebase);
   }
 };
 </script>
 
-<style lang="scss">
+<style src="./assets/sass/style.scss" lang="scss">
 </style>

@@ -433,4 +433,6 @@ export default {
 };
 </script>
 
-<style src="../assets/sass/style.scss" lang="scss"/>
+<style scoped>
+
+</style>

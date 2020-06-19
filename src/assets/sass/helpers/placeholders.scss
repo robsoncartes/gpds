@@ -1,5 +1,5 @@
-%centralizar {
-    display: flex;
-    align-items: center;
-    justify-content: center
+%background-shadow {
+    background-color: #fff;
+    border: #eee 1px solid;
+    box-shadow: 5px 5px 5px rgba($color: #111, $alpha: .1);
 }
