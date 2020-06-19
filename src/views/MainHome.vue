@@ -227,7 +227,6 @@ export default {
               app.estado = "Clique no botão e fale!";
               const escutou = event.results[i][0].transcript.trim();
               const content = escutou.toLowerCase();
-              console.log(content);
               app.output = content;
               app.adicionarHistorico(content);
               if (content.indexOf("título") !== -1) {
@@ -297,10 +296,7 @@ export default {
               });
           }
         })
-        .catch(function() {
-          console.log("Não encontramos mais nada. ");
-        });
-      console.log(this.movies);
+        .catch(function() {});
     },
 
     fetchMoviesByGenre(genre) {
@@ -308,8 +304,6 @@ export default {
       const app = this;
       const apikey = "a00e0631ee67bd0195cf03c00ae9fc1f";
       const result = this.genresName.find(obj => obj.name === genre);
-      console.log(genre);
-      console.log(result.id);
 
       let uri =
         "https://api.themoviedb.org/3/discover/movie?api_key=" +
@@ -326,7 +320,6 @@ export default {
               item.poster_path =
                 "http://image.tmdb.org/t/p/w185" + item.poster_path;
               app.movies.push(item);
-              console.log(item);
             }
           });
         });
@@ -358,13 +351,45 @@ export default {
         frase: frase,
         data: date
       };
-      this.historico.push(obj);
+
+      const ref = this.$firebase.database().ref(window.uid);
+      const cod = ref.push().key;
+
+      const payload = {
+        ...obj
+      };
+
+      ref
+        .child("historico")
+        .child(cod)
+        .set(payload, err => {
+          if (err) {
+            console.log(err);
+          }
+        });
     },
 
     adicionarFavorito(id) {
       if (this.favoritos.indexOf(this.movies[id - 1]) == -1) {
-        this.favoritos.push(this.movies[id - 1]);
-        this.$bvModal.show("modal-confirma-favorito");
+        let app = this;
+        const ref = this.$firebase.database().ref(window.uid);
+        const cod = ref.push().key;
+
+        const payload = {
+          cod,
+          ...this.movies[id - 1]
+        };
+
+        ref
+          .child("favoritos")
+          .child(cod)
+          .set(payload, err => {
+            if (err) {
+              console.log(err);
+            } else {
+              app.$bvModal.show("modal-confirma-favorito");
+            }
+          });
       } else {
         this.$bvModal.show("modal-erro-favorito");
       }
@@ -372,7 +397,6 @@ export default {
 
     abrirSinopse(id) {
       this.idSelecionado = id;
-      console.log(this.idSelecionado);
       this.sinopseModal = this.movies[id - 1];
       this.sinopseModal.google =
         "https://www.google.com/search?q=" + this.sinopseModal.title;
@@ -381,7 +405,6 @@ export default {
 
     abrirSinopseFavorito(id) {
       this.idSelecionadoFavorito = id;
-      console.log(this.idSelecionadoFavorito);
       this.sinopseModalFavorito = this.movies[id - 1];
       this.sinopseModalFavorito.google =
         "https://www.google.com/search?q=" + this.sinopseModalFavorito.title;
@@ -389,6 +412,7 @@ export default {
     },
 
     abrirHistorico() {
+      console.log(this.historico);
       this.$bvModal.show("modal-historico");
     },
 
@@ -397,7 +421,12 @@ export default {
     },
 
     removerFavorito(id) {
-      this.favoritos.splice(id - 1, 1);
+      const ref = this.$firebase.database().ref(window.uid);
+
+      ref
+        .child("favoritos")
+        .child(this.favoritos[id - 1].cod)
+        .set(null);
     },
 
     abrirDicas() {
@@ -436,11 +465,38 @@ export default {
       this.$router.push({ name: "login" });
 
       this.$root.$emit("Spinner::hide");
+    },
+
+    getData() {
+      const favoritos = this.$firebase
+        .database()
+        .ref(`/${window.uid}/favoritos`);
+
+      favoritos.on("value", data => {
+        let values = data.val();
+        try {
+          this.favoritos = Object.keys(values).map(i => values[i]);
+        } catch {
+          this.favoritos = [];
+        }
+      });
+
+      const historico = this.$firebase
+        .database()
+        .ref(`/${window.uid}/historico`);
+
+      if (historico) {
+        historico.on("value", data => {
+          let values = data.val();
+          this.historico = Object.keys(values).map(i => values[i]);
+        });
+      }
     }
   },
 
   created() {
     this.fetchGenreList();
+    this.getData();
   }
 };
 </script>

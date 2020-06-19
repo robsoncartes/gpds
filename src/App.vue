@@ -25,7 +25,7 @@ export default {
 
       setTimeout(() => {
         this.$root.$emit("Spinner::hide");
-      }, 300);
+      }, 1000);
     });
   }
 };
