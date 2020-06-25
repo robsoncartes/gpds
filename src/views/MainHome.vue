@@ -27,7 +27,8 @@
 
       <div class="main-container col-md-9 text-white">
         <div class="row m-auto">
-          <div class="row p-3">
+          <h2 class="text-center mt-4 pt-2 text-upper w-100">{{ titulo }}</h2>
+          <div class="row p-3 w-100">
             <div
               class="filme col-3 py-4"
               v-for="(movie, index) in movies"
@@ -39,7 +40,6 @@
             </div>
           </div>
         </div>
-        <div class="slideshow-sub"></div>
       </div>
 
       <b-modal id="modal-filme" size="lg">
@@ -205,7 +205,9 @@ export default {
       historico: [],
       favoritos: [],
       idSelecionado: "",
-      idSelecionadoFavorito: ""
+      idSelecionadoFavorito: "",
+      titulo: "",
+      favoritosInMovies: false
     };
   },
 
@@ -232,9 +234,11 @@ export default {
               if (content.indexOf("título") !== -1) {
                 let frase = content.split("título ");
                 app.fetchMoviesByTitle(frase[1]);
+                app.titulo = frase[1];
               } else if (content.indexOf("gênero") !== -1) {
                 let frase = content.split("gênero ");
                 app.fetchMoviesByGenre(frase[1]);
+                app.titulo = frase[1];
               } else if (content.indexOf("sobre o filme") !== -1) {
                 let frase = content.split("filme ");
                 app.abrirSinopse(frase[1]);
@@ -428,6 +432,10 @@ export default {
         .child("favoritos")
         .child(this.favoritos[id - 1].cod)
         .set(null);
+
+      if (this.favoritosInMovies) {
+        this.movies = this.favoritos;
+      }
     },
 
     abrirDicas() {
@@ -498,6 +506,15 @@ export default {
   created() {
     this.fetchGenreList();
     this.getData();
+    if (this.movies.length === 0) {
+      this.movies = this.favoritos;
+      if (this.favoritos.length === 0) {
+        this.titulo = "Bem vindo de volta!";
+      } else {
+        this.titulo = "Confira abaixo seus títulos favoritos!";
+      }
+      this.favoritosInMovies = true;
+    }
   }
 };
 </script>
