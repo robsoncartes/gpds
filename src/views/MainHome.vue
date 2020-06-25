@@ -14,7 +14,7 @@
           <li class="mb-1" @click="abrirFavoritos">Meus Favoritos</li>
           <li class="mb-1" @click="abrirHistorico">Ver Histórico</li>
           <li class="mb-1" @click="abrirDicas">Ver Dicas</li>
-          <li class="mb-1">Ver Créditos</li>
+          <li class="mb-1" v-b-modal.modal-mostrar-creditos>Ver Créditos</li>
           <li class="mb-1" @click="logout">Sair</li>
         </ul>
 
@@ -187,6 +187,26 @@
           <b-button size="sm" variant="success" @click="ok()">OK</b-button>
         </template>
       </b-modal>
+
+      <b-modal id="modal-mostrar-creditos" size="lg">
+        <template v-slot:modal-header="{}">
+          <h5 class="text-danger">Créditos</h5>
+        </template>
+        <template>
+          <div class="row justify-content-around align-items-center">
+            <div class="author text-center" v-for="(at, index) in author" :key="index">
+              <b-avatar :src="at.foto" size="6rem" class="img-author"></b-avatar>
+              <h5 class="nome-author pt-2">{{at.nome}}</h5>
+              <p class="descricao-author">{{ at.descricao}}</p>
+              <a :href="at.perfil">Sobre</a>
+            </div>
+          </div>
+        </template>
+
+        <template v-slot:modal-footer="{ ok }">
+          <b-button size="sm" variant="success" @click="ok()">OK</b-button>
+        </template>
+      </b-modal>
     </div>
   </transition>
 </template>
@@ -207,7 +227,34 @@ export default {
       idSelecionado: "",
       idSelecionadoFavorito: "",
       titulo: "",
-      favoritosInMovies: false
+      favoritosInMovies: false,
+      author: [
+        {
+          nome: "Rodolfo Santos",
+          descricao: "Scrum Team",
+          perfil: "https://rodolfo-santos.com/",
+          foto: "https://rodolfo-santos.com/assets/img/img-sobre.jpg"
+        },
+        {
+          nome: "Robson",
+          descricao: "Scrum Master",
+          perfil: "https://github.com/robsoncartes",
+          foto:
+            "https://scontent.fsjk2-1.fna.fbcdn.net/v/t1.0-9/15134538_1209377605820917_574908224256576333_n.jpg?_nc_cat=108&_nc_sid=174925&_nc_eui2=AeEJn0uksFJAeIsxbRBNhkP6w6g9a2Mga2_DqD1rYyBrb7z2TxeSDeDlWYMnIRXXBn5u8IbjNavxX5d1mjW0U03s&_nc_ohc=8i8tavwcfdUAX_10JH5&_nc_ht=scontent.fsjk2-1.fna&oh=8430d85a8478467736d924e5d91823f9&oe=5F196D38"
+        },
+        {
+          nome: "Lucas",
+          descricao: "Product Owner",
+          perfil: "",
+          foto: ""
+        },
+        {
+          nome: "Alexandre",
+          descricao: "Scrum Team",
+          perfil: "",
+          foto: ""
+        }
+      ]
     };
   },
 
