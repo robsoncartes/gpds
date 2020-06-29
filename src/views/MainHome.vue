@@ -233,7 +233,7 @@ export default {
           nome: "Rodolfo Santos",
           descricao: "Scrum Team",
           perfil: "https://rodolfo-santos.com/",
-          foto: "https://rodolfo-santos.com/assets/img/img-sobre.jpg"
+          foto: "https://avatars1.githubusercontent.com/u/29019771?s=460&u=0a30c199ba8d64dbec246cad98537ba928bfce28&v=4"
         },
         {
           nome: "Robson",
@@ -246,13 +246,13 @@ export default {
           nome: "Lucas",
           descricao: "Product Owner",
           perfil: "",
-          foto: ""
+          foto: "https://avatars3.githubusercontent.com/u/24232812?s=460&u=a5e9955044c3bec1dca9b28fc9e81666ccf78b3e&v=4"
         },
         {
           nome: "Alexandre",
           descricao: "Scrum Team",
           perfil: "",
-          foto: ""
+          foto: "https://scontent.fsjk1-1.fna.fbcdn.net/v/t1.0-9/548932_140908539382295_458655943_n.jpg?_nc_cat=109&_nc_sid=85a577&_nc_ohc=MeiWfdkTh7EAX_qiJcx&_nc_ht=scontent.fsjk1-1.fna&oh=da779538c58401a9818a9ba10ccade18&oe=5F2023BB"
         }
       ]
     };
