@@ -2,6 +2,8 @@
 
 De acordo com o a liberdade do tema foi criado um projeto para utilizar o recurso de reconhecimento de voz para buscar informações sobre filmes utilizando a plataforma web (HTML5 , JS e VUEJS).
 
+[![license mit](https://img.shields.io/github/license/robsoncartes/gpds?color=RED)](https://img.shields.io/github/license/robsoncartes/gpds/blob/master/LICENSE.md)
+
 ## Project setup
 ```
 npm install
