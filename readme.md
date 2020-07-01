@@ -42,4 +42,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Sinopse do filme
 - Buscar por gênero Filmes
 - Ver poster
-- Ler sinopse 
+- Ler sinopse
+
+## Organization
+See [gpds wiki](https://github.com/robsoncartes/gpds/wiki).
+
+See [gpds-workspace](https://app.zenhub.com/workspaces/gpds-workspace-5ec82b3f812f89a3173d90c3/board?repos=266192933).
