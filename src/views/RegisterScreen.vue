@@ -3,34 +3,34 @@
     <transition appear>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="login-container">
         <h1 class="mb-4 text-muted">Registrar-se</h1>
-        <hr />
+        <hr/>
         <b-form-group label="Nome de Usuário" label-for="inputUsuario" description>
           <b-form-input
-            id="inputUsuario"
-            v-model="form.username"
-            type="text"
-            required
-            placeholder="Digite o nome de usuário"
+              id="inputUsuario"
+              v-model="form.username"
+              type="text"
+              required
+              placeholder="Digite o nome de usuário"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group label="E-mail" label-for="inputEmail" description>
           <b-form-input
-            id="inputEmail"
-            v-model="form.email"
-            type="text"
-            required
-            placeholder="Entre com um e-mail válido"
+              id="inputEmail"
+              v-model="form.email"
+              type="text"
+              required
+              placeholder="Entre com um e-mail válido"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group label="Senha:" label-for="inputSenha" description>
           <b-form-input
-            id="inputSenha"
-            v-model="form.password"
-            type="password"
-            required
-            placeholder="Entre com a Senha"
+              id="inputSenha"
+              v-model="form.password"
+              type="password"
+              required
+              placeholder="Entre com a Senha"
           ></b-form-input>
         </b-form-group>
         <div class="mb-3">
@@ -49,7 +49,7 @@
       </template>
       <template>
         <p
-          class="text-muted"
+            class="text-muted"
         >Obrigado por se cadastrar, você será redirecioanado para a tela de login.</p>
       </template>
 

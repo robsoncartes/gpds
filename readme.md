@@ -4,6 +4,7 @@ De acordo com o a liberdade do tema foi criado um projeto para utilizar o recurs
 
 [![license mit](https://img.shields.io/github/license/robsoncartes/gpds?color=RED)](https://img.shields.io/github/license/robsoncartes/gpds/blob/master/LICENSE.md)
 
+![](windows-screen-shots/result-set-genero-action.png)
 ## Project setup
 ```
 npm install
@@ -28,12 +29,14 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-### Integrantes
+### Team Scrum
 
-- Lucas de Lima Chaves
-- Rodolfo Santos
-- Robson Sousa
-- Alexandre
+|		**Nome**    	|				**Github**            	|           **Role**            |
+|:--------------------:	|:-------------------------------------:|:-----------------------------:|
+| Alexandre Ramos 		| 					N/A 				|   Developer                   |
+| Lucas Chaves 	        |   https://github.com/lucas-chaves  	|   Product Owner               |
+| Robson Sousa		    |   https://github.com/robsoncartes 	|   Scrum Master                |
+| Rodolfo Santos 		|   https://github.com/rodolfo-santos   |   Developer / Product Owner   |
 
 ## Requisitos
 

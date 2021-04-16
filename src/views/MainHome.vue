@@ -30,12 +30,12 @@
           <h2 class="text-center mt-4 pt-2 text-upper w-100">{{ titulo }}</h2>
           <div class="row p-3 w-100">
             <div
-              class="filme col-3 py-4"
-              v-for="(movie, index) in movies"
-              :key="index"
-              @click="abrirSinopse(index + 1)"
+                class="filme col-3 py-4"
+                v-for="(movie, index) in movies"
+                :key="index"
+                @click="abrirSinopse(index + 1)"
             >
-              <img :src="movie.poster_path" />
+              <img :src="movie.poster_path"/>
               <div class="indice">{{ index + 1 }}</div>
             </div>
           </div>
@@ -48,7 +48,7 @@
         </template>
         <template>
           <div class="row">
-            <img :src="sinopseModal.poster_path" class="col-3" />
+            <img :src="sinopseModal.poster_path" class="col-3"/>
             <div class="col-9">
               <p class="text-muted">{{ sinopseModal.overview }}</p>
               <a :href="sinopseModal.google" target="_blank">Saber Mais</a>
@@ -58,10 +58,11 @@
 
         <template v-slot:modal-footer="{ ok }">
           <b-button
-            size="sm"
-            variant="danger"
-            @click="adicionarFavorito(idSelecionado)"
-          >Adicionar aos Favoritos</b-button>
+              size="sm"
+              variant="danger"
+              @click="adicionarFavorito(idSelecionado)"
+          >Adicionar aos Favoritos
+          </b-button>
           <b-button size="sm" variant="success" @click="ok()">OK</b-button>
         </template>
       </b-modal>
@@ -87,23 +88,24 @@
         <template>
           <table class="table table-hover">
             <thead>
-              <tr>
-                <th scope="col">Cód.</th>
-                <th scope="col">Título</th>
-                <th scope="col" class="text-center">Remover</th>
-              </tr>
+            <tr>
+              <th scope="col">Cód.</th>
+              <th scope="col">Título</th>
+              <th scope="col" class="text-center">Remover</th>
+            </tr>
             </thead>
             <tbody>
-              <tr v-for="(favorito, index) in favoritos" :key="index">
-                <th scope="row">{{ index + 1 }}</th>
-                <td
+            <tr v-for="(favorito, index) in favoritos" :key="index">
+              <th scope="row">{{ index + 1 }}</th>
+              <td
                   @click="abrirSinopseFavorito(index + 1)"
                   class="title-favorito"
-                >{{ favorito.title }}</td>
-                <td class="text-center">
-                  <b-icon-x class="btn-remove" @click="removerFavorito(index + 1)"></b-icon-x>
-                </td>
-              </tr>
+              >{{ favorito.title }}
+              </td>
+              <td class="text-center">
+                <b-icon-x class="btn-remove" @click="removerFavorito(index + 1)"></b-icon-x>
+              </td>
+            </tr>
             </tbody>
           </table>
         </template>
@@ -145,7 +147,7 @@
         </template>
         <template>
           <div class="row">
-            <img :src="sinopseModalFavorito.poster_path" class="col-3" />
+            <img :src="sinopseModalFavorito.poster_path" class="col-3"/>
             <div class="col-9">
               <p class="text-muted">{{ sinopseModalFavorito.overview }}</p>
               <a :href="sinopseModalFavorito.google" target="_blank">Saber Mais</a>
@@ -196,8 +198,8 @@
           <div class="row justify-content-around align-items-center">
             <div class="author text-center" v-for="(at, index) in author" :key="index">
               <b-avatar :src="at.foto" size="6rem" class="img-author"></b-avatar>
-              <h5 class="nome-author pt-2">{{at.nome}}</h5>
-              <p class="descricao-author">{{ at.descricao}}</p>
+              <h5 class="nome-author pt-2">{{ at.nome }}</h5>
+              <p class="descricao-author">{{ at.descricao }}</p>
               <a :href="at.perfil">Sobre</a>
             </div>
           </div>
@@ -231,26 +233,26 @@ export default {
       author: [
         {
           nome: "Rodolfo Santos",
-          descricao: "Scrum Team",
+          descricao: "Developer | Product Owner",
           perfil: "https://rodolfo-santos.com/",
           foto: "https://avatars1.githubusercontent.com/u/29019771?s=460&u=0a30c199ba8d64dbec246cad98537ba928bfce28&v=4"
         },
         {
-          nome: "Robson",
+          nome: "Robson Sousa",
           descricao: "Scrum Master",
-          perfil: "https://github.com/robsoncartes",
+          perfil: "https://avatars.githubusercontent.com/u/3692908?s=400&u=7a4f84da132ecc1e7072dde597850a02959d2d21&v=4",
           foto:
-            "https://scontent.fsjk2-1.fna.fbcdn.net/v/t1.0-9/15134538_1209377605820917_574908224256576333_n.jpg?_nc_cat=108&_nc_sid=174925&_nc_eui2=AeEJn0uksFJAeIsxbRBNhkP6w6g9a2Mga2_DqD1rYyBrb7z2TxeSDeDlWYMnIRXXBn5u8IbjNavxX5d1mjW0U03s&_nc_ohc=8i8tavwcfdUAX_10JH5&_nc_ht=scontent.fsjk2-1.fna&oh=8430d85a8478467736d924e5d91823f9&oe=5F196D38"
+              "https://github.com/account"
         },
         {
-          nome: "Lucas",
+          nome: "Lucas Chaves",
           descricao: "Product Owner",
           perfil: "",
           foto: "https://avatars3.githubusercontent.com/u/24232812?s=460&u=a5e9955044c3bec1dca9b28fc9e81666ccf78b3e&v=4"
         },
         {
-          nome: "Alexandre",
-          descricao: "Scrum Team",
+          nome: "Alexandre Ramos",
+          descricao: "Developer",
           perfil: "",
           foto: "https://scontent.fsjk1-1.fna.fbcdn.net/v/t1.0-9/548932_140908539382295_458655943_n.jpg?_nc_cat=109&_nc_sid=85a577&_nc_ohc=MeiWfdkTh7EAX_qiJcx&_nc_ht=scontent.fsjk1-1.fna&oh=da779538c58401a9818a9ba10ccade18&oe=5F2023BB"
         }
@@ -316,39 +318,40 @@ export default {
       const app = this;
       const apikey = "a00e0631ee67bd0195cf03c00ae9fc1f";
       let uri =
-        "https://api.themoviedb.org/3/search/movie?api_key=" +
-        apikey +
-        "&query=" +
-        movie;
+          "https://api.themoviedb.org/3/search/movie?api_key=" +
+          apikey +
+          "&query=" +
+          movie;
 
       fetch(uri)
-        .then(r => r.json())
-        .then(resultado => {
-          console.log(resultado);
-          for (let i = 1; i <= resultado.total_pages; i++) {
-            let uri =
-              "https://api.themoviedb.org/3/search/movie?api_key=" +
-              apikey +
-              "&query=" +
-              movie +
-              "&page=" +
-              i +
-              "&language=pt-BR";
+          .then(r => r.json())
+          .then(resultado => {
+            console.log(resultado);
+            for (let i = 1; i <= resultado.total_pages; i++) {
+              let uri =
+                  "https://api.themoviedb.org/3/search/movie?api_key=" +
+                  apikey +
+                  "&query=" +
+                  movie +
+                  "&page=" +
+                  i +
+                  "&language=pt-BR";
 
-            fetch(uri)
-              .then(re => re.json())
-              .then(movie => {
-                movie.results.forEach(item => {
-                  if (item.poster_path != null) {
-                    item.poster_path =
-                      "http://image.tmdb.org/t/p/w185" + item.poster_path;
-                    app.movies.push(item);
-                  }
-                });
-              });
-          }
-        })
-        .catch(function() {});
+              fetch(uri)
+                  .then(re => re.json())
+                  .then(movie => {
+                    movie.results.forEach(item => {
+                      if (item.poster_path != null) {
+                        item.poster_path =
+                            "http://image.tmdb.org/t/p/w185" + item.poster_path;
+                        app.movies.push(item);
+                      }
+                    });
+                  });
+            }
+          })
+          .catch(function () {
+          });
     },
 
     fetchMoviesByGenre(genre) {
@@ -358,42 +361,42 @@ export default {
       const result = this.genresName.find(obj => obj.name === genre);
 
       let uri =
-        "https://api.themoviedb.org/3/discover/movie?api_key=" +
-        apikey +
-        "&with_genres=" +
-        result.id +
-        "&language=pt-BR";
+          "https://api.themoviedb.org/3/discover/movie?api_key=" +
+          apikey +
+          "&with_genres=" +
+          result.id +
+          "&language=pt-BR";
 
       fetch(uri)
-        .then(r => r.json())
-        .then(resultado => {
-          resultado.results.forEach(item => {
-            if (item.poster_path != null) {
-              item.poster_path =
-                "http://image.tmdb.org/t/p/w185" + item.poster_path;
-              app.movies.push(item);
-            }
+          .then(r => r.json())
+          .then(resultado => {
+            resultado.results.forEach(item => {
+              if (item.poster_path != null) {
+                item.poster_path =
+                    "http://image.tmdb.org/t/p/w185" + item.poster_path;
+                app.movies.push(item);
+              }
+            });
           });
-        });
     },
 
     fetchGenreList() {
       const app = this;
       const apikey = "a00e0631ee67bd0195cf03c00ae9fc1f";
       let uri =
-        "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-        apikey +
-        "&language=pt-BR";
+          "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
+          apikey +
+          "&language=pt-BR";
 
       fetch(uri)
-        .then(r => r.json())
-        .then(resultado => {
-          app.genres = resultado.genres;
-          app.genres.forEach(genre => {
-            genre.name = genre.name.toLowerCase();
-            app.genresName.push(genre);
+          .then(r => r.json())
+          .then(resultado => {
+            app.genres = resultado.genres;
+            app.genres.forEach(genre => {
+              genre.name = genre.name.toLowerCase();
+              app.genresName.push(genre);
+            });
           });
-        });
     },
 
     adicionarHistorico(frase) {
@@ -412,13 +415,13 @@ export default {
       };
 
       ref
-        .child("historico")
-        .child(cod)
-        .set(payload, err => {
-          if (err) {
-            console.log(err);
-          }
-        });
+          .child("historico")
+          .child(cod)
+          .set(payload, err => {
+            if (err) {
+              console.log(err);
+            }
+          });
     },
 
     adicionarFavorito(id) {
@@ -433,15 +436,15 @@ export default {
         };
 
         ref
-          .child("favoritos")
-          .child(cod)
-          .set(payload, err => {
-            if (err) {
-              console.log(err);
-            } else {
-              app.$bvModal.show("modal-confirma-favorito");
-            }
-          });
+            .child("favoritos")
+            .child(cod)
+            .set(payload, err => {
+              if (err) {
+                console.log(err);
+              } else {
+                app.$bvModal.show("modal-confirma-favorito");
+              }
+            });
       } else {
         this.$bvModal.show("modal-erro-favorito");
       }
@@ -451,7 +454,7 @@ export default {
       this.idSelecionado = id;
       this.sinopseModal = this.movies[id - 1];
       this.sinopseModal.google =
-        "https://www.google.com/search?q=" + this.sinopseModal.title;
+          "https://www.google.com/search?q=" + this.sinopseModal.title;
       this.$bvModal.show("modal-filme");
     },
 
@@ -459,7 +462,7 @@ export default {
       this.idSelecionadoFavorito = id;
       this.sinopseModalFavorito = this.movies[id - 1];
       this.sinopseModalFavorito.google =
-        "https://www.google.com/search?q=" + this.sinopseModalFavorito.title;
+          "https://www.google.com/search?q=" + this.sinopseModalFavorito.title;
       this.$bvModal.show("modal-filme-favorito");
     },
 
@@ -476,9 +479,9 @@ export default {
       const ref = this.$firebase.database().ref(window.uid);
 
       ref
-        .child("favoritos")
-        .child(this.favoritos[id - 1].cod)
-        .set(null);
+          .child("favoritos")
+          .child(this.favoritos[id - 1].cod)
+          .set(null);
 
       if (this.favoritosInMovies) {
         this.movies = this.favoritos;
@@ -518,15 +521,15 @@ export default {
 
       await this.$firebase.auth().signOut();
 
-      this.$router.push({ name: "login" });
+      this.$router.push({name: "login"});
 
       this.$root.$emit("Spinner::hide");
     },
 
     getData() {
       const favoritos = this.$firebase
-        .database()
-        .ref(`/${window.uid}/favoritos`);
+          .database()
+          .ref(`/${window.uid}/favoritos`);
 
       favoritos.on("value", data => {
         let values = data.val();
@@ -538,8 +541,8 @@ export default {
       });
 
       const historico = this.$firebase
-        .database()
-        .ref(`/${window.uid}/historico`);
+          .database()
+          .ref(`/${window.uid}/historico`);
 
       if (historico) {
         historico.on("value", data => {

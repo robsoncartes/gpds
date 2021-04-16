@@ -3,30 +3,30 @@
     <transition appear>
       <b-form @submit.prevent="auth" class="login-container">
         <h1 class="mb-4 text-muted">BuscaFilmes</h1>
-        <hr />
+        <hr/>
         <b-form-group label="Usuário" label-for="inputUsuario" description>
           <b-form-input
-            id="inputUsuario"
-            v-model="email"
-            type="text"
-            required
-            placeholder="Entre com seu usuario"
+              id="inputUsuario"
+              v-model="email"
+              type="text"
+              required
+              placeholder="Entre com seu usuario"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group label="Senha:" label-for="inputSenha" description>
           <b-form-input
-            id="inputSenha"
-            v-model="password"
-            type="password"
-            required
-            placeholder="Entre com a Senha"
+              id="inputSenha"
+              v-model="password"
+              type="password"
+              required
+              placeholder="Entre com a Senha"
           ></b-form-input>
         </b-form-group>
         <div class="mb-3">
           <a
-            style="color: blue; cursor: pointer"
-            @click="abrirModalRegistro"
+              style="color: blue; cursor: pointer"
+              @click="abrirModalRegistro"
           >Ainda não é registrado? Registre-se</a>
         </div>
 
@@ -62,42 +62,42 @@
       <template>
         <b-form-group label="Nome" label-for="inputNomeRegistro" description>
           <b-form-input
-            id="inputNomeRegstro"
-            v-model="nameRegistro"
-            type="text"
-            required
-            placeholder="Insira seu nome"
+              id="inputNomeRegstro"
+              v-model="nameRegistro"
+              type="text"
+              required
+              placeholder="Insira seu nome"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group label="E-mail" label-for="inputEmailRegistro" description>
           <b-form-input
-            id="inputEmailRegistro"
-            v-model="emailRegistro"
-            type="email"
-            required
-            placeholder="Entre com um email válido"
+              id="inputEmailRegistro"
+              v-model="emailRegistro"
+              type="email"
+              required
+              placeholder="Entre com um email válido"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group label="Senha:" label-for="inputSenhaRegistro" description>
           <b-form-input
-            id="inputSenhaRegistro"
-            v-model="passwordRegistro"
-            type="password"
-            required
-            placeholder="Entre com a Senha"
+              id="inputSenhaRegistro"
+              v-model="passwordRegistro"
+              type="password"
+              required
+              placeholder="Entre com a Senha"
           ></b-form-input>
         </b-form-group>
       </template>
 
       <template v-slot:modal-footer>
         <b-button
-          type="submit"
-          variant="success"
-          class="mr-2"
-          :disabled="loadingRegistro"
-          @click="registrar"
+            type="submit"
+            variant="success"
+            class="mr-2"
+            :disabled="loadingRegistro"
+            @click="registrar"
         >
           <template v-if="loadingRegistro">
             Registrando...
@@ -129,12 +129,12 @@ export default {
   methods: {
     async auth() {
       this.loading = true;
-      const { email, password } = this;
+      const {email, password} = this;
 
       try {
         const res = await this.$firebase
-          .auth()
-          .signInWithEmailAndPassword(email, password);
+            .auth()
+            .signInWithEmailAndPassword(email, password);
 
         window.uid = res.user.uid;
 
@@ -148,21 +148,21 @@ export default {
 
     async registrar() {
       this.loadingRegistro = true;
-      const { emailRegistro, passwordRegistro } = this;
+      const {emailRegistro, passwordRegistro} = this;
 
       await this.$firebase
-        .auth()
-        .createUserWithEmailAndPassword(emailRegistro, passwordRegistro)
-        .then(user => {
-          this.nameRegistro = "";
-          this.emailRegistro = "";
-          this.passwordRegistro = "";
-          console.log(user);
-          alert("Registrado com Sucesso");
-        })
-        .catch(err => {
-          console.log(err);
-        });
+          .auth()
+          .createUserWithEmailAndPassword(emailRegistro, passwordRegistro)
+          .then(user => {
+            this.nameRegistro = "";
+            this.emailRegistro = "";
+            this.passwordRegistro = "";
+            console.log(user);
+            alert("Registrado com Sucesso");
+          })
+          .catch(err => {
+            console.log(err);
+          });
 
       this.loading = false;
     },

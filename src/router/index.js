@@ -7,29 +7,29 @@ const routes = [{
     path: '/login',
     name: 'login',
     component: () => import('../views/Login.vue')
-  },
+},
 
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('../views/MainHome.vue')
-  }
+    {
+        path: '/',
+        name: 'home',
+        component: () => import('../views/MainHome.vue')
+    }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 });
 
 router.beforeEach((to, from, next) => {
-  if (!window.uid && to.name !== 'login') {
-    next({
-      name: 'login'
-    })
-  } else {
-    next()
-  }
+    if (!window.uid && to.name !== 'login') {
+        next({
+            name: 'login'
+        })
+    } else {
+        next()
+    }
 })
 
 export default router

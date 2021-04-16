@@ -1,56 +1,56 @@
 .filme {
-    position: relative;
-    transition: .5s;
-    cursor: pointer;
+  position: relative;
+  transition: .5s;
+  cursor: pointer;
 
-    &:hover {
-        transform: scale(1.025);
-        z-index: 2;
-    }
+  &:hover {
+    transform: scale(1.025);
+    z-index: 2;
+  }
 
-    img {
-        border: solid 1px #fff;
-        height: 300px;
-        width: 100%;
-    }
+  img {
+    border: solid 1px #fff;
+    height: 300px;
+    width: 100%;
+  }
 
-    .indice {
-        height: 35px;
-        width: 35px;
-        background-color: #fff;
-        color: #111;
-        border-radius: 50%;
-        box-shadow: 0px 1px 6px $cor-black-1;
-        position: absolute;
-        left: -5px;
-        top: 5px;
+  .indice {
+    height: 35px;
+    width: 35px;
+    background-color: #fff;
+    color: #111;
+    border-radius: 50%;
+    box-shadow: 0px 1px 6px $cor-black-1;
+    position: absolute;
+    left: -5px;
+    top: 5px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 .fade-enter,
 .fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 .btn-remove {
-    transition: all 0.25;
+  transition: all 0.25;
 
-    &:hover {
-        cursor: pointer;
-        font-weight: bold;
-        transform: scale(1.2);
-    }
+  &:hover {
+    cursor: pointer;
+    font-weight: bold;
+    transform: scale(1.2);
+  }
 }
 
 .title-favorito {
-    cursor: pointer;
+  cursor: pointer;
 }

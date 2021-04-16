@@ -1,165 +1,165 @@
 body {
-    font-family: 'CaviarDreams', sans-serif;
-    margin: 0px;
-    padding: 0px;
-    background-color: $cor-black-1;
+  font-family: 'CaviarDreams', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  background-color: $cor-black-1;
 }
 
 .bg-black-1 {
-    background-color: $cor-black-1;
+  background-color: $cor-black-1;
 }
 
 .bg-black-2 {
-    background-color: $cor-black-2;
+  background-color: $cor-black-2;
 }
 
 .bg-black-3 {
-    background-color: $cor-black-3;
+  background-color: $cor-black-3;
 }
 
 
 .bg-transparent {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 
 .parallax-img {
-    background-attachment: fixed;
+  background-attachment: fixed;
 }
 
 .text-upper {
-    text-transform: uppercase !important;
+  text-transform: uppercase !important;
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .kerning-3 {
-    letter-spacing: 3px;
+  letter-spacing: 3px;
 }
 
 .btn-lg {
-    font-size: 0.8em;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: solid 2px;
-    width: 160px;
-    border-radius: 0px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: solid 2px;
+  width: 160px;
+  border-radius: 0px;
 }
 
 .font-0 {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 .font-1 {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .font-1-2 {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 .font-2 {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .margin-1 {
-    margin-top: 100px;
-    margin-bottom: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .margin-2 {
-    margin-top: 200px;
-    margin-bottom: 200px;
+  margin-top: 200px;
+  margin-bottom: 200px;
 }
 
 .padding-025 {
-    padding: 25px 0;
+  padding: 25px 0;
 }
 
 .padding-1 {
-    padding: 100px 0;
+  padding: 100px 0;
 }
 
 .padding-2 {
-    padding: 200px 0;
+  padding: 200px 0;
 }
 
 
 @media (max-width: 720px) {
 
-    .margin-1 {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
+  .margin-1 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
 
-    .margin-2 {
-        margin-top: 100px;
-        margin-bottom: 100px;
-    }
+  .margin-2 {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
 
-    .padding-025 {
-        padding: 25px 0;
-    }
+  .padding-025 {
+    padding: 25px 0;
+  }
 
-    .padding-1 {
-        padding: 50px 0;
-    }
+  .padding-1 {
+    padding: 50px 0;
+  }
 
-    .padding-2 {
-        padding: 100px 0;
-    }
+  .padding-2 {
+    padding: 100px 0;
+  }
 }
 
 
 p {
-    font-size: .9em;
-    line-height: 2em;
+  font-size: .9em;
+  line-height: 2em;
 }
 
 .icon-lg {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .b-bottom {
-    border: none;
-    border-bottom: solid 1px $cor-secundaria;
+  border: none;
+  border-bottom: solid 1px $cor-secundaria;
 }
 
 a.active {
-    background-color: transparent !important;
-    border-bottom: cor-padrao solid 2px !important;
-    transition: .5s;
+  background-color: transparent !important;
+  border-bottom: cor-padrao solid 2px !important;
+  transition: .5s;
 }
 
 .link-default {
+  color: $cor-padrao;
+  opacity: .7;
+  transition: .5s;
+
+  &:hover {
     color: $cor-padrao;
-    opacity: .7;
-    transition: .5s;
+    text-decoration: none;
+    opacity: 1;
+  }
 
-    &:hover {
-        color: $cor-padrao;
-        text-decoration: none;
-        opacity: 1;
-    }
-
-    ;
+;
 }
 
 input:focus {
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
 }
 
 .v-enter-active,
 .v-leave-active {
-    transition: all 1s;
+  transition: all 1s;
 }
 
 .v-enter,
 .v-leave-to {
-    opacity: 0;
-    transform: translate3d(-50px, 0, 0);
+  opacity: 0;
+  transform: translate3d(-50px, 0, 0);
 }
