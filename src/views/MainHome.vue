@@ -240,9 +240,9 @@ export default {
         {
           nome: "Robson Sousa",
           descricao: "Scrum Master",
-          perfil: "https://avatars.githubusercontent.com/u/3692908?s=400&u=7a4f84da132ecc1e7072dde597850a02959d2d21&v=4",
+          perfil: "https://github.com/robsoncartes",
           foto:
-              "https://github.com/account"
+              "https://avatars.githubusercontent.com/u/3692908?s=400&u=7a4f84da132ecc1e7072dde597850a02959d2d21&v=4"
         },
         {
           nome: "Lucas Chaves",
